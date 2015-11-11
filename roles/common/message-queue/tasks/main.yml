@@ -1,0 +1,15 @@
+---
+- name: Install rabbit-mq
+  yum: name=rabbit-mq-server state=latest
+
+- name: tart the message queue service and configure it to start when the system boots
+  service: name=rabbit-mq-server enabled=yes
+
+- name: Add Openstack User to rabbit-mq-
+- rabbitmq_user: user=openstack
+                 password=password
+                 vhost=/
+                 configure_priv=.*
+                 read_priv=.*
+                 write_priv=.*
+                 state=present

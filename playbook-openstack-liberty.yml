@@ -1,0 +1,20 @@
+--- 
+- hosts: all
+  roles:
+    - common
+
+- hosts: controller
+  roles:
+    - sql-db
+
+- hosts: controller
+  roles:
+    - nosql
+
+- hosts: controller
+  roles:
+    - message-queue
+
+- hosts: controller
+  roles:
+    - keystone
