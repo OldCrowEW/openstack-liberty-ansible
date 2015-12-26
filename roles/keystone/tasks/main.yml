@@ -12,6 +12,16 @@
 - name: Copy ~/.my.cnf in place
   copy: src=my.cnf dest=~/.my.cnf
 
+- name: Create keystone db
+  mysql_db: name=keystone state=present
+
+- name: Grant proper access to the keystone database
+  mysql_user: name=keystone password=keystone host={{ item }} priv=keystone.*:ALL,GRANT state=present
+  with_items:
+    - "%"
+    - localhost
+    - "{{ ansible_fqdn }}"
+
 - name: Install keystone packages
   yum: name={{ item }} state=latest
   with_items:
@@ -22,6 +32,9 @@
 
 - name: Start the Memcached service and configure it to start when the system boots
   service: name=memcached enabled=yes
+
+- name: Copy keystone.conf in place
+  template: src=keystone.conf.j2 dest=/etc/keystone/keystone.conf
 
 - name: Populate the Identity service database
   command: "su -s /bin/sh -c \"keystone-manage db_sync\" keystone"
