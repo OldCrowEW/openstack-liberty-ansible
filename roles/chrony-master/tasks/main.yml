@@ -1,0 +1,6 @@
+---
+- name: Copy chrony-master config in place
+  template: src=chrony-master.conf.j2 dest=/etc/chrony.conf
+
+- name: Enable and start chrony-master
+  service: name=chrony enabled=yes state=restarted

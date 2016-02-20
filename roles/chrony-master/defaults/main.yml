@@ -1,0 +1,4 @@
+chrony_master_timeserver_0: 0.centos.pool.ntp.org
+chrony_master_timeserver_1: 1.centos.pool.ntp.org
+chrony_master_timeserver_2: 2.centos.pool.ntp.org
+chrony_master_timeserver_3: 3.centos.pool.ntp.org

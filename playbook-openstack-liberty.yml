@@ -3,6 +3,24 @@
   roles:
     - common
 
+- host: controller
+  roles:
+    - chrony-master
+
+- hosts: chrony-master
+  roles:
+    - chrony-master
+  tags:
+    - chrony
+    - chrony-maste
+
+- host: chrony:slaves
+  roles:
+    - chrony-slave
+  tags:
+    - chrony
+    - chrony-slave
+
 - hosts: controller
   roles:
     - sql-db

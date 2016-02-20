@@ -1,4 +1,4 @@
-Database password (no variable used)	Root password for the database
+DB_PASS="dbpass"
 ADMIN_PASS="admin"
 CEILOMETER_DBPASS="ceildb"
 CEILOMETER_PASS="ceil"
@@ -18,3 +18,4 @@ NOVA_DBPASS="novadb"
 NOVA_PASS="nova"
 RABBIT_PASS="rabbit"
 SWIFT_PASS="swift"
+mgmt_subnet="10.0.0.0/24"
