@@ -10,7 +10,7 @@
     - chrony
     - chrony-maste
 
-- host: chrony:children
+- hosts: chrony:children
   roles:
     - chrony-slave
   tags:
