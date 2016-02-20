@@ -3,10 +3,6 @@
   roles:
     - common
 
-- host: controller
-  roles:
-    - chrony-master
-
 - hosts: chrony-master
   roles:
     - chrony-master
