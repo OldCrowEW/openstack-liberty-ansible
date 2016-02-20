@@ -34,3 +34,10 @@
     - keystone
   tags:
     - keystone
+
+- hosts: controller
+  roles:
+    - keystone-service
+  tags:
+    - keystone
+    - keystone-service

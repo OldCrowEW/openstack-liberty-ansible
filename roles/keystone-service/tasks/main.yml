@@ -1,0 +1,18 @@
+---
+- name: Create the service entity for the Identity service
+  keystone_service: >
+    name="keystone"
+    service_type="identity"
+    description="OpenStack Identity"
+    token="{{ admin_token }}"
+    state="present"
+
+- name: Create the service entity for the Identity service identity public
+  keystone_endpoint: >
+    service_name="keystone"
+    region="RegionOne"
+    public_url="http://{{ os_auth }}:5000/v2.0"
+    internal_url="http://{{ os_auth }}:5000/v2.0"
+    admin_url="http://{{ os_auth }}:35357/v2.0"
+    token="{{ admin_token }}"
+    state="present"
