@@ -5,6 +5,7 @@
      - mariadb 
      - mariadb-server
      - python2-PyMySQL
+     - MySQL-python
 
 - name: Put Default Mariadb configuration in place
   template: src=mariadb_openstack.cnf.j2 dest=/etc/my.cnf.d/mariadb_openstack.cnf

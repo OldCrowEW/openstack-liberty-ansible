@@ -1,7 +1,7 @@
 ---
 # TODO: Make passwords dynamic
 - name: Update mysql root password
-  mysql_db: name=root host={{ keystone }} password=keystone
+  mysql_user: name=root host={{ item }} password={{ db_pass }}
   with_items:
     - "{{ ansible_hostname }}"
     - "{{ ansible_fqdn }}"
@@ -10,7 +10,7 @@
     - localhost
 
 - name: Copy ~/.my.cnf in place
-  copy: src=my.cnf dest=~/.my.cnf
+  template: src=my.cnf.j2 dest=~/.my.cnf
 
 - name: Create keystone db
   mysql_db: name=keystone state=started state=present
@@ -26,7 +26,8 @@
   yum: name={{ item }} state=latest
   with_items:
     - openstack-keystone
-    - httpd mod_wsgi
+    - httpd
+    - mod_wsgi
     - memcached
     - python-memcached
 
