@@ -1,4 +1,4 @@
-DB_PASS: "dbpass"
+db_pass: "dbpass"
 ADMIN_PASS: "admin"
 CEILOMETER_DBPASS: "ceildb"
 CEILOMETER_PASS: "ceil"
