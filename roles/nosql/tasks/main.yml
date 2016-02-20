@@ -11,4 +11,4 @@
               line="bind_ip = 10.0.0.11"
 
 - name: Start the MongoDB service and configure it to start when the system boots
-  service: name=mongod enabled=yes
+  service: name=mongod state=started enabled=yes

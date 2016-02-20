@@ -13,7 +13,7 @@
   copy: src=my.cnf dest=~/.my.cnf
 
 - name: Create keystone db
-  mysql_db: name=keystone state=present
+  mysql_db: name=keystone state=started state=present
 
 - name: Grant proper access to the keystone database
   mysql_user: name=keystone password=keystone host={{ item }} priv=keystone.*:ALL,GRANT state=present
@@ -31,7 +31,7 @@
     - python-memcached
 
 - name: Start the Memcached service and configure it to start when the system boots
-  service: name=memcached enabled=yes
+  service: name=memcached state=started enabled=yes
 
 - name: Copy keystone.conf in place
   template: src=keystone.conf.j2 dest=/etc/keystone/keystone.conf
@@ -48,4 +48,4 @@
   template: src=wsgi-keystone.conf.j2 dest=/etc/httpd/conf.d/wsgi-keystone.conf
 
 - name: Start the Apache HTTP service and configure it to start when the system boots
-  service: name=httpd enabled=yes
+  service: name=httpd state=started enabled=yes

@@ -10,4 +10,4 @@
   template: src=mariadb_openstack.cnf.j2 dest=/etc/my.cnf.d/mariadb_openstack.cnf
 
 - name: Start the database service and configure it to start when the system boots
-  service: name=mariadb.service enabled=yes
+  service: name=mariadb.service state=started enabled=yes
