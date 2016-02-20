@@ -1,6 +1,6 @@
 [mysqld]
-##TODO: set this to variable
-bind-address = 10.0.0.11
+##TODO: set this to dynamic interface variable
+bind-address = {{ hostvars[inventory_hostname]['ansible_eno16780032']['ipv4']['address'] }}
 
 default-storage-engine = innodb
 innodb_file_per_table
