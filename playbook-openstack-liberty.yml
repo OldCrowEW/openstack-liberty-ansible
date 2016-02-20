@@ -8,7 +8,7 @@
     - chrony-master
   tags:
     - chrony
-    - chrony-maste
+    - chrony-master
 
 - hosts: chrony:children
   roles:
@@ -31,4 +31,6 @@
 
 - hosts: controller
   roles:
+    - keystone
+  tags:
     - keystone
