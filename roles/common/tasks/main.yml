@@ -1,4 +1,7 @@
 ---
+- name: Set hostname
+  hostname: name={{ inventory_hostname_short }}
+
 - name: Install EPEL
   yum: name=epel-release state=latest
 
