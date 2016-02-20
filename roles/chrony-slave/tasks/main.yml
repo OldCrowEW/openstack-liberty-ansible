@@ -3,4 +3,4 @@
   template: src=chrony-slave.conf.j2 dest=/etc/chrony.conf
 
 - name: Enable and start chrony-slave
-  service: name=chrony enabled=yes state=restarted
+  service: name=chronyd enabled=yes state=restarted
