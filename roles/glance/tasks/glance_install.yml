@@ -1,0 +1,22 @@
+---
+- name: Install glance packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - openstack-glance
+    - python-glance
+    - python-glanceclient
+
+- name: Copy glance-api.conf in place
+  template: src=glance-api.conf.j2 dest=/etc/glance/glance-api.conf
+
+- name: Copy glance-registry.conf in place
+  template: src=glance-registry.conf.j2 dest=/etc/glance/glance-registry.conf
+
+- name: Populate the Identity service database
+  command: "su -s /bin/sh -c "glance-manage db_sync" glance"
+
+- name: Start the Image services and configure them to start when the system boots
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - openstack-glance-api.service
+    - openstack-glance-registry.service

@@ -1,3 +1,4 @@
 ---
 - include: glance_prereqs.yml
 - include: glance_service_setup.yml
+- include: glance_install.yml

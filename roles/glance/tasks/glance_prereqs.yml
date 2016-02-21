@@ -3,7 +3,7 @@
   mysql_db: name=glance state=started state=present
 
 - name: Grant proper access to the glance database
-  mysql_user: name=glance password=glance host={{ item }} priv=glance.*:ALL,GRANT state=present
+  mysql_user: name=glance password={{ glance_dbpass }} host={{ item }} priv=glance.*:ALL,GRANT state=present
   with_items:
     - "%"
     - localhost
