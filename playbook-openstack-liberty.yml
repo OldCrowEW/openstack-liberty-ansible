@@ -41,3 +41,10 @@
   tags:
     - keystone
     - keystone-service
+
+- hosts: controller
+  roles:
+    - keystone-defaults
+  tags:
+    - keystone
+    - keystone-defaults

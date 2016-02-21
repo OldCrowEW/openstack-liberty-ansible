@@ -1,0 +1,66 @@
+---
+#- name: Install pip
+#  yum: name=python-pip state=latest
+
+#- name: Install shade via pip
+#  pip: name=shade
+
+- name: Create Keystone Admin Project (tenant)
+  keystone_user: >
+    tenant="admin"
+    tenant_description="Admin Project"
+    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    token="{{ admin_token }}"
+    state="present"
+
+- name: Create Keystone Service Project (tenant)
+  keystone_user: >
+    tenant="service"
+    tenant_description="Service Project"
+    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    token="{{ admin_token }}"
+    state="present"
+
+- name: Create Keystone Demo Project (tenant)
+  keystone_user: >
+    tenant="demo"
+    tenant_description="Demo Project"
+    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    token="{{ admin_token }}"
+    state="present"
+
+- name: Create Admin user and set password
+  _keystone_user: >
+      user="admin"
+      password="{{ admin_pass }}"
+      tenant="admin"
+      endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+      token="{{ admin_token }}"
+      state="present"
+
+- name: Create Admin role
+  keystone_user: >
+    role="admin"
+    user="admin"
+    tenant="admin"
+    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    token="{{ admin_token }}"
+    state="present"
+
+- name: Create Demo user and set password
+  _keystone_user: >
+      user="demo"
+      password="{{ demo_pass}}"
+      tenant="demo"
+      endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+      token="{{ admin_token }}"
+      state="present"
+
+- name: Create Demo role
+  keystone_user: >
+    role="user"
+    user="demo"
+    tenant="demo"
+    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    token="{{ admin_token }}"
+    state="present"
