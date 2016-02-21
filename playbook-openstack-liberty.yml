@@ -34,3 +34,9 @@
     - keystone
   tags:
     - keystone
+
+- hosts: controller
+  roles:
+    - glance
+  tags:
+    - glance

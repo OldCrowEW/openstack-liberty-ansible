@@ -1,0 +1,10 @@
+---
+- name: Create glance db
+  mysql_db: name=glance state=started state=present
+
+- name: Grant proper access to the glance database
+  mysql_user: name=glance password=glance host={{ item }} priv=glance.*:ALL,GRANT state=present
+  with_items:
+    - "%"
+    - localhost
+    - "{{ ansible_fqdn }}"

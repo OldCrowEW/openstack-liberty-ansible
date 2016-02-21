@@ -1,0 +1,9 @@
+os_auth: controller
+glance_protocol: http
+glance_hostname: controller
+glance_admin_port: 9292
+glance_internal_port: 9292
+glance_public_port: 9292
+glance_admin_url: "{{ glance_protocol }}://{{ glance_hostname }}:{{ glance_admin_port }}"
+glance_internal_url: "{{ glance_protocol }}://{{ glance_hostname }}:{{ glance_internal_port }}"
+glance_public_url: "{{ glance_protocol }}://{{ glance_hostname }}:{{ glance_public_port }}"
