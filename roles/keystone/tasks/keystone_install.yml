@@ -1,0 +1,29 @@
+---
+- name: Install keystone packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - openstack-keystone
+    - httpd
+    - mod_wsgi
+    - memcached
+    - python-memcached
+
+- name: Start the Memcached service and configure it to start when the system boots
+  service: name=memcached state=started enabled=yes
+
+- name: Copy keystone.conf in place
+  template: src=keystone.conf.j2 dest=/etc/keystone/keystone.conf
+
+- name: Populate the Identity service database
+  command: "su -s /bin/sh -c \"keystone-manage db_sync\" keystone"
+
+- name: Add Server name to httpd.conf
+  lineinfile: dest=/etc/httpd/conf/httpd.conf
+              regexp=^ServerName
+              line="ServerName controller"
+
+- name: Copy wsgi-keystone.conf in place
+  template: src=wsgi-keystone.conf.j2 dest=/etc/httpd/conf.d/wsgi-keystone.conf
+
+- name: Start the Apache HTTP service and configure it to start when the system boots
+  service: name=httpd state=started enabled=yes

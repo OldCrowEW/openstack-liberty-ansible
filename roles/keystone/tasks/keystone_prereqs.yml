@@ -1,0 +1,23 @@
+---
+# TODO: Make passwords dynamic
+- name: Update mysql root password
+  mysql_user: name=root host={{ item }} password={{ db_pass }}
+  with_items:
+    - "{{ ansible_hostname }}"
+    - "{{ ansible_fqdn }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: Copy ~/.my.cnf in place
+  template: src=my.cnf.j2 dest=~/.my.cnf
+
+- name: Create keystone db
+  mysql_db: name=keystone state=started state=present
+
+- name: Grant proper access to the keystone database
+  mysql_user: name=keystone password=keystone host={{ item }} priv=keystone.*:ALL,GRANT state=present
+  with_items:
+    - "%"
+    - localhost
+    - "{{ ansible_fqdn }}"

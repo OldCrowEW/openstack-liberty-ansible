@@ -34,17 +34,3 @@
     - keystone
   tags:
     - keystone
-
-- hosts: controller
-  roles:
-    - keystone-service
-  tags:
-    - keystone
-    - keystone-service
-
-- hosts: controller
-  roles:
-    - keystone-defaults
-  tags:
-    - keystone
-    - keystone-defaults

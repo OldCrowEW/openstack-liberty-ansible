@@ -1,4 +1,0 @@
-keystone_protocol: http
-keystone_hostname: controller
-keystone_admin_port: 35357
-keystone_ver: v2.0

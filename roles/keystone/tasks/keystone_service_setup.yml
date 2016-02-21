@@ -1,15 +1,27 @@
 ---
-#- name: Install pip
-#  yum: name=python-pip state=latest
+- name: Create the service entity for the Identity service
+  keystone_service: >
+    name="keystone"
+    service_type="identity"
+    description="OpenStack Identity"
+    token="{{ admin_token }}"
+    state="present"
 
-#- name: Install shade via pip
-#  pip: name=shade
+- name: Create the service entity for the Identity service identity public
+  keystone_endpoint: >
+    service_name="keystone"
+    region="RegionOne"
+    public_url="{{ keystone_public_url }}"
+    internal_url="{{ keystone_internal_url }}"
+    admin_url="{{ keystone_admin_url }}"
+    token="{{ admin_token }}"
+    state="present"
 
 - name: Create Keystone Admin Project (tenant)
   keystone_user: >
     tenant="admin"
     tenant_description="Admin Project"
-    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    endpoint="{{ keystone_admin_url }}"
     token="{{ admin_token }}"
     state="present"
 
@@ -17,7 +29,7 @@
   keystone_user: >
     tenant="service"
     tenant_description="Service Project"
-    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    endpoint="{{ keystone_admin_url }}"
     token="{{ admin_token }}"
     state="present"
 
@@ -25,7 +37,7 @@
   keystone_user: >
     tenant="demo"
     tenant_description="Demo Project"
-    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    endpoint="{{ keystone_admin_url }}"
     token="{{ admin_token }}"
     state="present"
 
@@ -34,7 +46,7 @@
       user="admin"
       password="{{ admin_pass }}"
       tenant="admin"
-      endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+      endpoint="{{ keystone_admin_url }}"
       token="{{ admin_token }}"
       state="present"
 
@@ -43,7 +55,7 @@
     role="admin"
     user="admin"
     tenant="admin"
-    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    endpoint="{{ keystone_admin_url }}"
     token="{{ admin_token }}"
     state="present"
 
@@ -52,7 +64,7 @@
       user="demo"
       password="{{ demo_pass}}"
       tenant="demo"
-      endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+      endpoint="{{ keystone_admin_url }}"
       token="{{ admin_token }}"
       state="present"
 
@@ -61,6 +73,6 @@
     role="user"
     user="demo"
     tenant="demo"
-    endpoint="{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+    endpoint="{{ keystone_admin_url }}"
     token="{{ admin_token }}"
     state="present"
