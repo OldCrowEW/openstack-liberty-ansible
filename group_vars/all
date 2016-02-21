@@ -1,6 +1,5 @@
 db_pass: "dbpass"
 admin_pass: "admin"
-glance_pass: "glance"
 CEILOMETER_DBPASS: "ceildb"
 CEILOMETER_PASS: "ceil"
 CINDER_DBPASS: "cinderdb"
