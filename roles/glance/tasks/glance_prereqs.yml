@@ -1,6 +1,6 @@
 ---
 - name: Create glance db
-  mysql_db: name=glance state=started state=present
+  mysql_db: name=glance state=present
 
 - name: Grant proper access to the glance database
   mysql_user: name=glance password={{ glance_dbpass }} host={{ item }} priv=glance.*:ALL,GRANT state=present
