@@ -9,5 +9,15 @@ glance_internal_url: "{{ glance_protocol }}://{{ glance_hostname }}:{{ glance_in
 glance_public_url: "{{ glance_protocol }}://{{ glance_hostname }}:{{ glance_public_port }}"
 keystone_auth_uri: http://controller:5000
 keystone_auth_url: http://controller:35357
-keystone_admin_url: http://controller:35357/v3
+
 auth_plugin: password
+
+keystone_protocol: http
+keystone_hostname: controller
+keystone_admin_port: 35357
+keystone_internal_port: 5000
+keystone_public_port: 5000
+keystone_ver: v2.0
+keystone_admin_url: "{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_admin_port }}/{{ keystone_ver }}"
+keystone_internal_url: "{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_internal_port }}/{{ keystone_ver }}"
+keystone_public_url: "{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keystone_public_port }}/{{ keystone_ver }}"

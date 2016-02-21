@@ -1,6 +1,6 @@
 ---
-- name: Create Admin user and set password
-  _keystone_user: >
+- name: Create Glance user and set password
+  keystone_user: >
       user="glance"
       password="{{ glance_pass }}"
       tenant="service"
@@ -27,7 +27,7 @@
 
 - name: Create the Image service API endpoints
   keystone_endpoint: >
-    service_name="image"
+    service_name="glance"
     region="RegionOne"
     public_url="{{ glance_public_url }}"
     internal_url="{{ glance_internal_url }}"

@@ -13,7 +13,7 @@
   template: src=glance-registry.conf.j2 dest=/etc/glance/glance-registry.conf
 
 - name: Populate the Identity service database
-  command: "su -s /bin/sh -c "glance-manage db_sync" glance"
+  command: "su -s /bin/sh -c \"glance-manage db_sync\" glance"
 
 - name: Start the Image services and configure them to start when the system boots
   service: name={{ item }} state=started enabled=yes
