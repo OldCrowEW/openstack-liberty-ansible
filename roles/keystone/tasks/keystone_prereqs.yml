@@ -13,7 +13,7 @@
   template: src=my.cnf.j2 dest=~/.my.cnf
 
 - name: Create keystone db
-  mysql_db: name=keystone state=started state=present
+  mysql_db: name=keystone state=present
 
 - name: Grant proper access to the keystone database
   mysql_user: name=keystone password=keystone host={{ item }} priv=keystone.*:ALL,GRANT state=present
