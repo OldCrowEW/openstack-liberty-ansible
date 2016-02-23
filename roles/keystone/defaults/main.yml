@@ -1,3 +1,4 @@
+keystone_host: controller
 os_auth: controller
 keystone_protocol: http
 keystone_hostname: controller
