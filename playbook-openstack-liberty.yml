@@ -2,6 +2,8 @@
 - hosts: all
   roles:
     - common
+  tags:
+    - common
 
 - hosts: chrony-master
   roles:
@@ -20,13 +22,18 @@
 - hosts: controller
   roles:
     - sql-db
+  tags:sql-db
 
 - hosts: controller
   roles:
     - nosql
+  tags:
+    - nosql
 
 - hosts: controller
   roles:
+    - message-queue
+  tags:
     - message-queue
 
 - hosts: controller
