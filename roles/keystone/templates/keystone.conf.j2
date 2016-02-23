@@ -471,8 +471,6 @@ admin_token = {{ admin_token }}
 
 [database]
 
-connection = mysql://keystone:keystone@controller/keystone
-
 #
 # From oslo.db
 #
@@ -494,7 +492,7 @@ connection = mysql://keystone:keystone@controller/keystone
 # Deprecated group/name - [DEFAULT]/sql_connection
 # Deprecated group/name - [DATABASE]/sql_connection
 # Deprecated group/name - [sql]/connection
-#connection = <None>
+connection = mysql://keystone:{{ keystone_dbpass }}@localhost/keystone
 
 # The SQLAlchemy connection string to use to connect to the slave database.
 # (string value)
@@ -1021,6 +1019,10 @@ connection = mysql://keystone:keystone@controller/keystone
 # (string value)
 #user_enabled_emulation_dn = <None>
 
+# Use the "group_member_attribute" and "group_objectclass" settings to
+# determine membership in the emulated enabled group. (boolean value)
+#user_enabled_emulation_use_group_config = false
+
 # List of additional LDAP attributes used for mapping additional attribute
 # mappings for users. Attribute mapping format is <ldap_attr>:<user_attr>,
 # where ldap_attr is the attribute in the LDAP entry and user_attr is the
@@ -1119,6 +1121,10 @@ connection = mysql://keystone:keystone@controller/keystone
 # This option is deprecated for removal.
 # Its value may be silently ignored in the future.
 #project_enabled_emulation_dn = <None>
+
+# Use the "group_member_attribute" and "group_objectclass" settings to
+# determine membership in the emulated enabled group. (boolean value)
+#project_enabled_emulation_use_group_config = false
 
 # Additional attribute mappings for projects. Attribute mapping format is
 # <ldap_attr>:<user_attr>, where ldap_attr is the attribute in the LDAP entry
@@ -1907,7 +1913,6 @@ provider = uuid
 # Entrypoint for the token persistence backend driver in the
 # keystone.token.persistence namespace. Supplied drivers are kvs, memcache,
 # memcache_pool, and sql. (string value)
-#driver = sql
 driver = memcache
 
 # Toggle for token system caching. This has no effect unless global caching is

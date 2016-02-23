@@ -16,8 +16,9 @@
   mysql_db: name=keystone state=present
 
 - name: Grant proper access to the keystone database
-  mysql_user: name=keystone password=keystone host={{ item }} priv=keystone.*:ALL,GRANT state=present
+  mysql_user: name=keystone password={{ keystone_dbpass }} host={{ item }} priv=keystone.*:ALL,GRANT state=present
   with_items:
     - "%"
     - localhost
     - "{{ ansible_fqdn }}"
+    - "{{ ansible_hostname }}"
