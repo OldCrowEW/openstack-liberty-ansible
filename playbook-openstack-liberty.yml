@@ -22,7 +22,8 @@
 - hosts: controller
   roles:
     - sql-db
-  tags:sql-db
+  tags:
+    - sql-db
 
 - hosts: controller
   roles:
