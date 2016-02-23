@@ -270,7 +270,7 @@
 # The URL to the keystone service. If "use_user_token" is not in
 # effect and using keystone auth, then URL of keystone can be
 # specified. (string value)
-auth_url={{ keystone_auth_url }}
+#auth_url=
 
 # The strategy to use for authentication. If "use_user_token" is not
 # in effect, then auth strategy can be specified. (string value)
@@ -978,6 +978,7 @@ filesystem_store_datadir=/var/lib/glance/images/
 
 # Complete public Identity API endpoint. (string value)
 auth_uri={{ keystone_auth_uri }}
+auth_url={{ keystone_auth_url }}
 
 auth_plugin = {{ auth_plugin }}
 project_domain_id = default
