@@ -55,3 +55,10 @@
   tags:
     - nova-controller
     - nova
+
+- hosts: compute
+  roles:
+    - nova-compute
+  tags:
+    - nova-compute
+    - nova

@@ -339,7 +339,7 @@ my_ip= {{ nova_controller_mgmt_ip }}
 #periodic_fuzzy_delay=60
 
 # A list of APIs to enable by default (list value)
-enabled_apis=osapi_compute,metadata
+#enabled_apis=ec2,osapi_compute,metadata
 
 # A list of APIs with enabled SSL (list value)
 #enabled_ssl_apis =
@@ -501,7 +501,7 @@ enabled_apis=osapi_compute,metadata
 # testing only, as it does no actual credential checking. noauth2 provides
 # administrative credentials only if 'admin' is specified as the username.
 #  (string value)
-auth_strategy=keystone
+#auth_strategy=keystone
 
 # Treat X-Forwarded-For as the canonical remote address. Only enable this if
 # you have a sanitizing proxy. (boolean value)
@@ -1740,7 +1740,7 @@ rpc_backend=rabbit
 # Deprecated group;name - DEFAULT;sql_connection
 # Deprecated group;name - [DATABASE]/sql_connection
 # Deprecated group;name - [sql]/connection
-connection=mysql://nova:{{ nova_dbpass }}@localhost/nova
+#connection=<None>
 
 # The SQLAlchemy connection string to use to connect to the slave database.
 # (string value)
@@ -2307,7 +2307,7 @@ password = {{ nova_pass }}
 
 # Libvirt domain type (string value)
 # Allowed values: kvm, lxc, qemu, uml, xen, parallels
-#virt_type=kvm
+virt_type = {{ virt_type }}
 
 # Override the default libvirt URI (which is dependent on virt_type) (string
 # value)
@@ -2930,7 +2930,7 @@ lock_path=/var/lib/nova/tmp
 
 # The RabbitMQ broker address where a single node is used. (string value)
 # Deprecated group;name - DEFAULT;rabbit_host
-rabbit_host= {{ rabbit_host }}
+rabbit_host=controller
 
 # The RabbitMQ broker port where a single node is used. (integer value)
 # Deprecated group;name - DEFAULT;rabbit_port
@@ -2946,11 +2946,11 @@ rabbit_host= {{ rabbit_host }}
 
 # The RabbitMQ userid. (string value)
 # Deprecated group;name - DEFAULT;rabbit_userid
-rabbit_userid= {{ rabbit_userid }}
+#rabbit_userid=guest
 
 # The RabbitMQ password. (string value)
 # Deprecated group;name - DEFAULT;rabbit_password
-rabbit_password={{ rabbit_password }}
+#rabbit_password=guest
 
 # The RabbitMQ login method. (string value)
 # Deprecated group;name - DEFAULT;rabbit_login_method
@@ -3308,7 +3308,7 @@ rabbit_password={{ rabbit_password }}
 # Location of VNC console proxy, in the form
 # "http://127.0.0.1:6080/vnc_auto.html" (string value)
 # Deprecated group;name - DEFAULT;novncproxy_base_url
-#novncproxy_base_url=http://127.0.0.1:6080/vnc_auto.html
+novncproxy_base_url = http://controller:6080/vnc_auto.html
 
 # Location of nova xvp VNC console proxy, in the form
 # "http://127.0.0.1:6081/console" (string value)
@@ -3317,16 +3317,16 @@ rabbit_password={{ rabbit_password }}
 
 # IP address on which instance vncservers should listen (string value)
 # Deprecated group;name - DEFAULT;vncserver_listen
-vncserver_listen = $my_ip
+vncserver_listen = 0.0.0.0
 
 # The address to which proxy clients (like nova-xvpvncproxy) should connect
 # (string value)
 # Deprecated group;name - DEFAULT;vncserver_proxyclient_address
-vncserver_proxyclient_address = %my_ip
+vncserver_proxyclient_address = $my_ip
 
 # Enable VNC related features (boolean value)
 # Deprecated group;name - DEFAULT;vnc_enabled
-#enabled=true
+enabled = true
 
 # Keymap for VNC (string value)
 # Deprecated group;name - DEFAULT;vnc_keymap

@@ -20,3 +20,5 @@ rabbit_pass: "rabbit"
 SWIFT_PASS: "swift"
 mgmt_subnet: "10.0.0.0/24"
 admin_token: "153afe22240d38602e8d"
+#virt_type: kvm
+virt_type: qemu

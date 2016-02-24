@@ -1,0 +1,15 @@
+---
+- name: Install nova packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - openstack-nova-compute
+    - sysfsutils
+
+- name: Copy nova.conf in place
+  template: src=nova.conf.j2 dest=/etc/nova/nova.conf
+
+- name: Start the Compute service including its dependencies and configure them to start automatically when the system boots
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - openstack-nova-compute
+    - sysfsutils
