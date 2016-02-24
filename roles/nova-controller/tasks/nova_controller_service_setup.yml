@@ -1,0 +1,36 @@
+---
+- name: Create Nova user and set password
+  keystone_user: >
+      user="nova"
+      password="{{ nova_pass }}"
+      tenant="service"
+      endpoint="{{ keystone_admin_url }}"
+      token="{{ admin_token }}"
+      state="present"
+
+- name: Add Nova to Admin role, Service Project (tenant)
+  keystone_user: >
+    role="admin"
+    user="nova"
+    tenant="service"
+    endpoint="{{ keystone_admin_url }}"
+    token="{{ admin_token }}"
+    state="present"
+
+- name: Create the service entity for the Nova service
+  keystone_service: >
+    name="nova"
+    service_type="compute"
+    description="OpenStack Compute"
+    token="{{ admin_token }}"
+    state="present"
+
+- name: Create the Nova service API endpoints
+  keystone_endpoint: >
+    service_name="nova"
+    region="RegionOne"
+    public_url="{{ nova_public_url }}"
+    internal_url="{{ nova_internal_url }}"
+    admin_url="{{ nova_admin_url }}"
+    token="{{ admin_token }}"
+    state="present"

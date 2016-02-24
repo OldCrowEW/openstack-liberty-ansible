@@ -1,0 +1,4 @@
+---
+- include: nova_controller_prereqs.yml
+- include: nova_controller_service_setup.yml
+- include: nova_controller_install.yml

@@ -48,3 +48,10 @@
     - glance
   tags:
     - glance
+
+- hosts: controller
+  roles:
+    - nova-controller
+  tags:
+    - nova-controller
+    - nova

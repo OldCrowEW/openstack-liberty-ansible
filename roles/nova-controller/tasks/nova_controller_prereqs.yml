@@ -1,0 +1,11 @@
+---
+- name: Create nova db
+  mysql_db: name=nova state=present
+
+- name: Grant proper access to the nova database
+  mysql_user: name=nova password={{ nova_dbpass }} host={{ item }} priv=nova.*:ALL,GRANT state=present
+  with_items:
+    - "%"
+    - localhost
+    - "{{ ansible_fqdn }}"
+    - "{{ ansible_hostname }}"
