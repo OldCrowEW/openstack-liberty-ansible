@@ -11,5 +11,5 @@
 - name: Start the Compute service including its dependencies and configure them to start automatically when the system boots
   service: name={{ item }} state=started enabled=yes
   with_items:
-    - openstack-nova-compute
-    - sysfsutils
+    - libvirtd.service 
+    - openstack-nova-compute.service
