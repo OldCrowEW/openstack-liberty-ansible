@@ -7,7 +7,7 @@
 
 - name: Add Openstack User to rabbit-mq-
   rabbitmq_user: user=openstack
-                 password=password
+                 password={{ rabbit_pass }}
                  vhost=/
                  configure_priv=.*
                  read_priv=.*
