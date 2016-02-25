@@ -1,10 +1,10 @@
 os_auth: controller
-nova_controller_mgmt_ip: 10.0.0.31
+nova_controller_mgmt_ip: 10.0.0.11
 nova_protocol: http
 nova_hostname: controller
-nova_admin_port: 9292
-nova_internal_port: 9292
-nova_public_port: 9292
+nova_admin_port: 8774
+nova_internal_port: 8774
+nova_public_port: 8774
 nova_api_ver: v2
 nova_admin_url: "{{ nova_protocol }}://{{ nova_hostname }}:{{ nova_admin_port }}/{{ nova_api_ver}}/%(tenant_id)s"
 nova_internal_url: "{{ nova_protocol }}://{{ nova_hostname }}:{{ nova_internal_port }}/{{ nova_api_ver }}/%(tenant_id)s"
@@ -26,6 +26,5 @@ keystone_public_url: "{{ keystone_protocol }}://{{ keystone_hostname }}:{{ keyst
 
 rabbit_host: controller
 rabbit_userid: openstack
-rabbit_password: rabbit
 
 glance_host: controller

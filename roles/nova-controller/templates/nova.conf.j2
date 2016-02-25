@@ -193,7 +193,7 @@
 #s3_affix_tenant=false
 
 # IP address of this host (string value)
-my_ip= {{ nova_controller_mgmt_ip }}
+my_ip = 192.168.150.11
 
 # Block storage IP address of this host (string value)
 #my_block_storage_ip=$my_ip
@@ -339,7 +339,7 @@ my_ip= {{ nova_controller_mgmt_ip }}
 #periodic_fuzzy_delay=60
 
 # A list of APIs to enable by default (list value)
-enabled_apis=osapi_compute,metadata
+enabled_apis = osapi_compute,metadata
 
 # A list of APIs with enabled SSL (list value)
 #enabled_ssl_apis =
@@ -833,7 +833,6 @@ auth_strategy=keystone
 #
 
 # The full class name of the network API class to use (string value)
-#network_api_class=nova.network.api.API
 network_api_class = nova.network.neutronv2.api.API
 
 # Driver to use for network creation (string value)
@@ -1060,8 +1059,7 @@ linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDr
 #multi_host=false
 
 # The full class name of the security API class (string value)
-#security_group_api=nova
-securty_group_api = neutron
+security_group_api = neutron
 
 #
 # From nova.openstack.common.memorycache
@@ -1237,7 +1235,6 @@ securty_group_api = neutron
 
 # Firewall driver (defaults to hypervisor specific iptables driver) (string
 # value)
-#firewall_driver=nova.virt.libvirt.firewall.IptablesFirewallDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
 
 # Whether to allow network traffic from same network (boolean value)
@@ -1459,7 +1456,7 @@ rpc_backend=rabbit
 
 # The SQLAlchemy connection string to use to connect to the Nova API database.
 # (string value)
-#connection=mysql://nova:nova@localhost/nova
+#connection=mysql://nova:{{ nova_dbpass }}@{{ os_auth }}/nova
 
 # If True, SQLite uses synchronous mode. (boolean value)
 #sqlite_synchronous=true
@@ -1740,7 +1737,7 @@ rpc_backend=rabbit
 # Deprecated group;name - DEFAULT;sql_connection
 # Deprecated group;name - [DATABASE]/sql_connection
 # Deprecated group;name - [sql]/connection
-connection=mysql://nova:{{ nova_dbpass }}@localhost/nova
+connection = mysql://nova:novadb@controller/nova
 
 # The SQLAlchemy connection string to use to connect to the slave database.
 # (string value)
@@ -2126,8 +2123,8 @@ host = {{ glance_host }}
 
 # Complete public Identity API endpoint. (string value)
 #auth_uri=<None>
-auth_uri = http://controller:5000
-auth_url = http://controller:35357
+auth_uri = http://{{ keystone_hostname }}:{{ keystone_public_port }}
+auth_url = http://{{ keystone_hostname }}:{{ keystone_admin_port }}
 auth_plugin = password
 project_domain_id = default
 user_domain_id = default
@@ -2749,7 +2746,7 @@ password = {{ nova_pass }}
 # Defaults to environment variable OSLO_LOCK_PATH. If external locks are used,
 # a lock path must be set. (string value)
 # Deprecated group;name - DEFAULT;lock_path
-lock_path=/var/lib/nova/tmp
+lock_path = /var/lib/nova/tmp
 
 
 [oslo_messaging_amqp]
@@ -2930,7 +2927,7 @@ lock_path=/var/lib/nova/tmp
 
 # The RabbitMQ broker address where a single node is used. (string value)
 # Deprecated group;name - DEFAULT;rabbit_host
-rabbit_host= {{ rabbit_host }}
+rabbit_host = {{ rabbit_host }}
 
 # The RabbitMQ broker port where a single node is used. (integer value)
 # Deprecated group;name - DEFAULT;rabbit_port
@@ -2946,11 +2943,11 @@ rabbit_host= {{ rabbit_host }}
 
 # The RabbitMQ userid. (string value)
 # Deprecated group;name - DEFAULT;rabbit_userid
-rabbit_userid= {{ rabbit_userid }}
+rabbit_userid = {{ rabbit_userid }}
 
 # The RabbitMQ password. (string value)
 # Deprecated group;name - DEFAULT;rabbit_password
-rabbit_password={{ rabbit_password }}
+rabbit_password = {{ rabbit_pass }}
 
 # The RabbitMQ login method. (string value)
 # Deprecated group;name - DEFAULT;rabbit_login_method
@@ -3322,7 +3319,7 @@ vncserver_listen = $my_ip
 # The address to which proxy clients (like nova-xvpvncproxy) should connect
 # (string value)
 # Deprecated group;name - DEFAULT;vncserver_proxyclient_address
-vncserver_proxyclient_address = %my_ip
+vncserver_proxyclient_address = $my_ip
 
 # Enable VNC related features (boolean value)
 # Deprecated group;name - DEFAULT;vnc_enabled
